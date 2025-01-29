@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+    <link rel="shortcut icon" href="../Assets/joinLogo.svg" type="image/x-icon">
+    <link rel="stylesheet" href="../styles/style.css">
+
+    <link rel="stylesheet" href="../styles/header.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+
+    <link rel="stylesheet" href="../styles/addTask.css">
+    <link rel="stylesheet" href="../styles/responsive/addTaskResponsive.css">
+    <link rel="stylesheet" href="../styles/responsive/NavbarResponsive.css">
+    <link rel="stylesheet" href="../styles/responsive/navbarLoggedInResponsive.css">
+
+    <script src="../script/header.js"></script>
+    <script src="../script/addTask.js"></script>
+    <script src="../script/addTaskPrio.js" defer></script>
+    <script src="../script/addTaskContactDropdown.js"></script>
+    <script src="../script/addTaskSubtask.js"></script>
+    <script src="../templates/addTaskTemplateHTML.js"defer></script>
+    <script src="../templates/boardTemplate.js"></script>
+    <script src="../script/board.js"></script>
+    <script src="../script/addTaskFirebase.js"></script>
+    <script src="../script/addTaskFormHandling.js"></script>
+
+</head>
+
+<body onload="loadContactsForDropdown(), renderPrioButtons()">
+    <aside w3-include-html="../templates/header.html"></aside>
+    <aside w3-include-html="../templates/navbarLoggedIn.html"></aside>
+
+    <main class="mainSectionAddTask">
+        <section w3-include-html="../templates/addTaskTemplate.html" class="sectionTemplateAddTask"></section>
+    </main>
+
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script>
+        w3.includeHTML(() => {
+            loadContactsForDropdown();
+            renderPrioButtons(".prioButtonsContainer", "normal");
+        });
+    </script>
+</body>
+
+</html>

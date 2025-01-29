@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board</title>
+    <link rel="shortcut icon" href="../Assets/joinLogo.svg" type="image/x-icon">
+    <link rel="stylesheet" href="../styles/style.css">
+
+    <link rel="stylesheet" href="../styles/header.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+
+    <link rel="stylesheet" href="../styles/board.css">
+    <link rel="stylesheet" href="../styles/boardOverlay.css">
+    <link rel="stylesheet" href="../styles/responsive/boardResponsive.css">
+    <link rel="stylesheet" href="../styles/responsive/NavbarResponsive.css">
+    <link rel="stylesheet" href="../styles/addTask.css">
+    <link rel="stylesheet" href="../styles/responsive/addTaskResponsive.css">
+    <link rel="stylesheet" href="../styles/boardOverlayEdit.css">
+    <link rel="stylesheet" href="../styles/responsive/boardOverlayResponsive.css">
+    <link rel="stylesheet" href="../styles/contactButton.css">
+    <link rel="stylesheet" href="../styles/responsive/navbarLoggedInResponsive.css">
+
+    <script src="../script/header.js"></script>
+    <script src="../templates/boardTemplate.js"></script>
+    <script src="../script/boardSearch.js"></script>
+    <script src="../script/boardPopUp.js"></script>
+    <script src="../script/contacts.js"></script>
+    <script src="../script/addTask.js"></script>
+    <script src="../templates/addTaskTemplateHTML.js"></script>
+    <script src="../script/addTaskContactDropdown.js"></script>
+    <script src="../script/addTaskPrio.js"></script>
+    <script src="../script/addTaskSubtask.js"></script>
+    <script src="../script/addTaskFirebase.js"></script>
+    <script src="../script/addTaskFormHandling.js"></script>
+    <script src="../script/boardPopUpEdit.js"></script>
+    <script src="../script/boardPopUpDelete.js"></script>
+    <script src="../script/boardProgressbar.js"></script>
+    <script src="../script/boardSaveChanges.js"></script>
+    <script src="../script/boardPopUpEditTask.js"></script>
+    <script src="../script/boardPopUpEditSubtask.js"></script>
+    <script src="../script/boardPopUpEditContacts.js"></script>
+    <script src="../script/contactsDisplay.js"></script>
+
+    <body onload="initializeBoard()">
+    <aside w3-include-html="../templates/header.html"></aside>
+    <aside w3-include-html="../templates/navbarLoggedIn.html"></aside>
+
+    <main class="main-content">
+        <div id="popUpTaskOnBoard" class="flex">
+            <div id="templateAddTask" class="d-none" onclick="closeTaskOnBoard()">
+                <div class="dialogBackground">
+                    <div class="taskBackground">
+                        <div class="flex-end"><img id="closeAddTaskOnBoard" onclick="closeTaskOnBoard()"
+                                class="cursorPointer" src="../Assets/addTask/close.svg" alt=""></div>
+                        <section onclick="dontClose(event)" w3-include-html=" ../templates/addTaskTemplate.html">
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="forAddTask">
+            <div id="headerWrapper">
+                <div id="boardHeader">
+                    <h2>Board</h2>
+                    <div id="findAddTask">
+                        <div class="searchbarBoard">
+                            <input type="search" placeholder="Find task" id="boardSearchbar" oninput="filterTasks()">
+                            <div class="seperatorSearchbar"></div>
+                            <img src="../Assets/board/magnifier.svg" alt="magnifier" class="input-icon" onclick="filterTasks()">
+                        </div>
+                        <button id="buttonAddTask" type="submit" class="cursorPointer"
+                            onclick="addTaskOnBoard(), loadContactsForDropdown()">Add task +</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="taskBoard">
+                <div class="column-wrapper">
+                    <div class="column-title">To do <img class="cursorPointer" src="../Assets/board/plusButton.svg"
+                            alt="plus button" onclick="addTaskOnBoard(), loadContactsForDropdown()">
+                    </div>
+                    <div class="column" id="toDoColumn">
+                    </div>
+                </div>
+                <div class="column-wrapper">
+                    <div class="column-title">In progress <img class="cursorPointer"
+                            src="../Assets/board/plusButton.svg" alt="plus button" onclick="addTaskOnBoard(), loadContactsForDropdown()">
+                    </div>
+                    <div class="column" id="inProgressColumn">
+                    </div>
+                </div>
+                <div class="column-wrapper">
+                    <div class="column-title">Await feedback <img class="cursorPointer"
+                            src="../Assets/board/plusButton.svg" alt="plus button" onclick="addTaskOnBoard(), loadContactsForDropdown()">
+                    </div>
+                    <div class="column" id="awaitFeedbackColumn">
+                    </div>
+                </div>
+                <div class="column-wrapper">
+                    <div class="column-title">Done</div>
+                    <div class="column" id="doneColumn"></div>
+                </div>
+            </div>
+        </div>
+        <div id="backgroundOverlay" class="background-overlay dNone" onclick="closeTaskOverlay(event)"></div>
+<div id="taskOverlay" class="overlay dNone">
+    <div class="overlay-content" onclick="event.stopPropagation()">
+        <div class="close-button-area">
+        <button class="close-button" onclick="closeTaskOverlay(event)"></button>
+        </div>
+        <div id="overlayDetails"></div>
+    </div>
+</div>
+    </main>
+
+    <footer></footer>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script>
+        w3.includeHTML(() => {
+            renderPrioButtons(".prio-container #prioOverlayEdit", "overlay");
+            renderPrioButtons(".prioButtonsContainer", "normal")
+        });
+    </script>
+    <script src="../script/board.js"></script>
+    <script src="../script/boardFirebase.js"></script>
+    <script src="../script/boardTask.js"></script>
+    <script src="../script/boardDragDrop.js"></script>
+</body>
+
+</html>

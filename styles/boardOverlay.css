@@ -1,0 +1,316 @@
+.board-overlay {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    border-radius: 20px;
+    width: 525px;
+    padding: 4px 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    overflow-y: scroll;
+    height: 50%;
+    top: calc(50vh - 20px);
+    left: calc(50vw - 10px);
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.overlay-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-radius: 20px 20px 0 0;
+}
+
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.task-category {
+    background: #0038FF;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #aaa;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.overlay-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* border-radius: 0 0 20px 20px; */
+    z-index: 1002;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-bottom: 25px;
+}
+
+body.no-interaction *:not(.overlay):not(.overlay *) {
+    pointer-events: none;
+}
+
+.task-title {
+    font-size: 35px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.task-description {
+    font-size: 16px;
+    color: #555;
+}
+
+.task-info {
+    display: contents;
+}
+
+.task-info p {
+    margin: 3px 0;
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.contacts-section {
+    margin-top: 20px;
+}
+
+.due-date-container {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.overlay-heading {
+    font-weight: bold;
+    margin-right: 10px;
+    min-width: 80px;
+}
+
+#due-date-display{
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.priority-icon {
+    width: 16px;
+    height: auto;
+}
+
+.prio-display {
+    display: flex;
+    align-items: center;
+    gap: 5px; 
+    padding-right: 66%;
+    padding-left: 37px;
+}
+
+.prio-text {
+    font-weight: normal;
+}
+
+.priority-icon {
+    width: 16px; 
+    height: auto;
+}
+
+#prio-container-overlay {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.contact-list-overlay {
+    display: flex;
+    height: 140px;
+    overflow: scroll;
+}
+
+#cardOverlayContacts {
+    margin-left: 5%;
+}
+
+#overlay-initials {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+    margin-top: 2%;
+}
+
+.contact-initials {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.subtasks-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 10px;
+}
+
+.subtask-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    padding: 5px;
+    list-style-position: inside;
+}
+
+.seperatorSubtaskIcons {
+    background-color: #D1D1D1;
+    width: 2px;
+    height: 24px;
+    margin: 0 0px;
+    align-self: stretch;
+}
+
+.subtasks-section ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.subtasks-section li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;;
+}
+
+.subtask-checkbox {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    border: 1px solid #1F1F1F;
+    border-radius: 5px;
+    background-color: #ffffff;
+    position: relative;
+    outline: none;
+    padding: 0 !important;
+}
+
+.subtask-checkbox:checked {
+    background-color: #ffffff;
+    border-color: #1F1F1F;
+}
+
+.subtask-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 4px;
+    width: 6px;
+    height: 12px;
+    border: solid #000000;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    z-index: 2;
+}
+
+.subtask-checkbox:checked::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -3px;
+    width: 6px;
+    height: 10px;
+    background-color: #ffffff;
+    z-index: 2;
+    border-radius: 0 5px 0 0;
+}
+
+.action-links {
+    position: sticky;
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    border-radius: 10px;
+    bottom: -27px;
+    right: 100px;
+    z-index: 1000;
+    background-color: #ffffff;
+    height: 10%;
+    width: 100%;
+}
+
+.action-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #5F6368;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.action-link img {
+    width: 20px;
+    height: 20px;
+}
+
+.action-link:hover {
+    background-color: #e0e0e0;
+}
+
+.task-title input,
+.task-description textarea,
+.task-info input,
+.task-info select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.dNone {
+    display: none;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    display: none;
+}
+
+.background-overlay.active {
+    display: block;
+}
+
+.no-scroll {
+    overflow: hidden;
+}

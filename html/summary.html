@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join382</title>
+    <link rel="shortcut icon" href="../Assets/joinLogo.svg" type="image/x-icon">
+    <link rel="stylesheet" href="../styles/style.css">
+
+    <link rel="stylesheet" href="../styles/header.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+
+    <link rel="stylesheet" href="../styles/addTask.css">
+    <link rel="stylesheet" href="../styles/summary.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/responsive/mainResponsive.css">
+    <link rel="stylesheet" href="../styles/responsive/summaryResponsive.css">
+    <link rel="stylesheet" href="../styles/responsive/NavbarResponsive.css">
+    <link rel="stylesheet" href="../styles/responsive/navbarLoggedInResponsive.css">
+
+    <script src="../script/header.js"></script>
+    <script src="../script/login.js"></script>
+
+
+</head>
+
+<body onload="loadContent('summary.html')">
+    <aside w3-include-html="../templates/header.html"></aside>
+    <aside w3-include-html="../templates/navbarLoggedIn.html"></aside>
+
+    <main>
+        <div class="goodmorning">
+            <p class="good">Good Morning,</p>
+            <p class="name"></p>
+        </div>
+        <div class="details">
+
+            <div class="titeljoin">
+                <h1 class="titleHeader">Join 360</h1>
+                <div class="victor"></div>
+                <div class="titleText">Key Metrics at a Glance</div>
+            </div>
+
+            <div class="checkpencil">
+                <div class="pencil cursorPointer" onclick="summaryToBoard()">
+                    <div id="summaryimgTodo"></div>
+                    <div class="summaryp">
+                        <div class="summarynmb todo"></div>
+                        <div class="summarymission">To-do</div>
+                    </div>
+                </div>
+                <div class="pencil cursorPointer" onclick="summaryToBoard()">
+                    <div id="summaryimgDone"></div>
+                    <div class="summaryp">
+                        <div class="summarynmb done"></div>
+                        <div class="summarymission">Done</div>
+                    </div>
+                </div>
+            </div>
+            <div class="urgent cursorPointer" onclick="summaryToBoard()">
+                <div class="numimg">
+                    <img class="urgentimg" src="../Assets/Urgent.svg" alt="Urgent">
+                    <div class="nmbtext">
+                        <p class="urgentnmb"></p>
+                        <p class="urgenttext">Urgent</p>
+                    </div>
+                    <div class="seperatorUrgent"></div>
+                    <div id="upcomingDeadline">
+                        <p>Upcoming Deadline</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tasks">
+                <div class="undertask cursorPointer" onclick="summaryToBoard()">
+                    <div class="underundertask">
+                        <p class="tasknmb board"></p>
+                        <p class="tasktext">Tasks in Board</p>
+                    </div>
+                </div>
+                <div class="undertask cursorPointer" onclick="summaryToBoard()">
+                    <div class="underundertask">
+                        <p class="tasknmb progress"></p>
+                        <p class="tasktext">Tasks in Progress</p>
+                    </div>
+                </div>
+                <div class="undertask cursorPointer" onclick="summaryToBoard()">
+                    <div class="underundertask">
+                        <p class="tasknmb awaitFeedback"></p>
+                        <p class="tasktext">Awaiting Feedback</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../script/summary.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script>
+        w3.includeHTML();
+    </script>
+</body>
+
+</html>

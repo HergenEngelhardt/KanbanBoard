@@ -1,0 +1,122 @@
+header {
+    background-color: white;
+    text-align: center;
+    height: 95px;
+    display: flex;
+    padding-left: 120px;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    left: 232px;
+    top: 0;
+    right: 0;
+    box-shadow: 0px 4px 4px 0px #0000001A;
+    z-index: 999;
+}
+
+.user-info {
+    display: flex;
+    gap: 16px;
+    margin-right: 1em;
+    align-items: center;
+}
+
+.user-icon {
+    position: absolute;
+    right: 5px;
+    color: #29ABE2;
+    font-size: 20px;
+    min-width: 42px;
+    height: 42px;
+    border-radius: 100%;
+    border: solid 2px rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 2px;
+    cursor: pointer;
+}
+
+header p {
+    font-size: 24px;
+}
+
+.ser-icon {
+    border-radius: 100%;
+    border: 1px;
+}
+
+#name_menu:hover {
+    background-color: #D1D8E0;
+}
+
+
+.join_logo_mobile {
+    display: none;
+}
+
+.helpme-icon {
+    position: absolute;
+    right: 55px;
+}
+
+.helpme-icon:hover {
+    transform: scale(1.1);
+}
+
+.header_overlay {
+    height: 100vh;
+    width: 100vw;
+    z-index: 10000;
+}
+
+.mobile_headerNav {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 90px;
+    right: 0 !important;
+    background-color: #2A3647;
+    z-index: 1000;
+    padding: 16px;
+    border-radius: 20px;
+    border-top-right-radius: 0;
+    margin: 6px;
+    width: 150px;
+    max-height: 140px;
+    height: 130px;
+    justify-content: space-evenly;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.active {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.mobile_headerNav a {
+    text-decoration: none;
+    color: #CDCDCD;
+    padding: 5px 8px;
+    font-size: 16px;
+    font-weight: 100;
+    text-align: left;
+    cursor: pointer;
+}
+
+.headerImg {
+    display: none;
+
+}
+
+.headerImg img {
+    height: 60px;
+    width: 70px;
+}
+
+.mobile_headerNav a:hover {
+    background-color: #2A3D59;
+}

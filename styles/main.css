@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    font-family: 'inter';
+    overflow: hidden;
+    background-color: #F6F7F8;
+}
+
+.dNone {
+    display: none;
+}
+
+main {
+    margin-left: 232px;
+    margin-top: 95px;
+    max-width: 1920px;
+}
+
+body::-webkit-scrollbar {
+    background-color: #fff;
+    width: 16px;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: #fff;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #babac0;
+    border-radius: 16px;
+    border: 4px solid #fff;
+}
+
+body::-webkit-scrollbar-button {
+    display: none;
+}
+
+@font-face {
+    font-display: swap;
+    font-family: 'Inter';
+    font-style: 'regular';
+    font-weight: 400;
+    src: url('../fonts/static/Inter_24pt-Regular.ttf') format('woff2');
+}

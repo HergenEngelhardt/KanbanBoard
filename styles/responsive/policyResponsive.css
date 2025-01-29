@@ -1,0 +1,49 @@
+@media (max-width: 990px) {
+    .policy-content {
+        margin-left: 20px;
+        margin-bottom: 100px;
+        max-height: calc(80vh - 96px);
+        margin-top: 120px;
+    }
+
+    .legalNotice {
+        margin-top: 90px;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: 120px;
+    }
+
+    #sidefoot {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0;
+    }
+
+    .sidebarPolicyLegal {
+        display: flex;
+        width: max-content;
+    }
+
+    .navbarResponse {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .backToLogIn:hover,
+    .sidebarPolicy:hover {
+        text-decoration: none;
+        color: inherit;
+        background: none;
+    }
+
+    .sidebarPolicy {
+        background-color: transparent;
+    }
+
+    .sidebarLegalNotice:hover {
+        color: white !important;
+        transform: scale(1.0) !important;
+    }
+}

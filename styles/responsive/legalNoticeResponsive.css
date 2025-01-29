@@ -1,0 +1,44 @@
+@media (max-width: 980px) {
+  .main-content {
+    flex-direction: column;
+    padding: 0 20px;
+    margin-left: 20px;
+    margin-right: 20;
+    margin-top: 40px;
+  }
+
+  .legalNotice {
+    margin-top: 90px;
+    margin-bottom: 80px;
+    padding: 20px;
+    overflow-y: auto;
+  }
+
+  #sidefoot {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+  }
+
+  .sidebarPolicyLegal {
+    display: flex;
+    width: max-content;
+  }
+
+  .backToLogIn:hover,
+  .sidebarLegalNotice:hover {
+    text-decoration: none;
+    color: inherit;
+    background: none;
+  }
+
+  .sidebarLegalNotice {
+    background-color: transparent;
+  }
+
+  .sidebarPolicy:hover {
+    color: white !important;
+    transform: scale(1.0) !important;
+  }
+}

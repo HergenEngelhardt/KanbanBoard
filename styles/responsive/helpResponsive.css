@@ -1,0 +1,9 @@
+@media (max-width:990px) {
+    .help-content {
+        margin-left: 20px;
+    }
+
+    .navbarResponse {
+        display: none;
+    }
+}

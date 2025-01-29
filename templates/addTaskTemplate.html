@@ -1,0 +1,121 @@
+<h1 class="h1Task">Add Task</h1>
+<div class="taskSide">
+    <form>
+        <div class="flex taskBothSide">
+            <div class="taskLeftSide width_440">
+                <section class="titleTask fonts">
+                    <div class="flex titleAddTask">
+                        <div class="title font_2A3647">Title</div>
+                        <div class="colorRed">*</div>
+                    </div>
+                    <input class="cursorPointer" id="inputTitle" type="text" placeholder="Enter a title" required>
+                </section>
+
+                <section class="descriptionTask fd-column">
+                    <div class="fonts description font_2A3647">Description</div>
+                    <textarea class="cursorPointer" id="textareaDescription" name=""
+                        placeholder="Enter a Description"></textarea>
+                </section>
+
+                <div class="input-group">
+                    <label for="assignTask" class="add-task-label fonts font_2A3647">Assigned to<span
+                            class="required">*</span></label>
+                    <div class="input-with-icon">
+                        <input type="text" name="assigned" class="add-task-title add-task-assigned-to cursorPointer"
+                            id="assigned-to" placeholder="Selected contacts to assign" autocomplete="off" readonly
+                            onclick="toggleDropdown()">
+                        <div>
+                            <img src="../Assets/addTask/arrow_drop_downaa.svg" id="dropdown"
+                                class="cursorPointer margin-right dropdownimg" onclick="toggleDropdown()">
+                            <img src="../Assets/addTask/Property 1=Variant4.svg" id="dropdown1"
+                                class="cursorPointer margin-right dropdownimg d-none" onclick="toggleDropdown()">
+                        </div>
+                        <div id="assignTaskDropdown" class="dNone">
+                        </div>
+                    </div>
+                    <div class="flex" id="selectedContactsContainer"></div>
+                </div>
+
+            </div>
+
+            <div class="seperator"></div>
+
+            <div class="taskRightSide width_440">
+                <section>
+                    <div class="flex fonts">
+                        <div class="font_2A3647">Due date</div>
+                        <div class="colorRed">*</div>
+                    </div>
+                    <input onclick="calculateDueDate()" class="input_12_16 width_440 cursorPointer fonts" type="date"
+                        id="dueDate" required>
+                </section>
+
+                <section>
+                    <div class="prioButtonsContainer"></div>
+                </section>
+
+                <div class="input-group">
+                    <label for="assignTask" class="add-task-label fonts headlineAssignedTo font_2A3647">Category<span
+                            class="required">*</span></label>
+                    <div class="input-with-icon" id="inputCategory">
+                        <input type="text" name="category" class="add-task-title add-task-assigned-to cursorPointer"
+                            id="categorySelect" placeholder="Select task category" autocomplete="off" readonly
+                            onclick="toggleDropdownCategory()">
+                        <div>
+                            <img src="../Assets/addTask/arrow_drop_downaa.svg" id="dropdownCategory"
+                                class="cursorPointer margin-right dropdownimg" onclick="toggleDropdownCategory()">
+                            <img src="../Assets/addTask/Property 1=Variant4.svg" id="dropdownCategory1"
+                                class="cursorPointer margin-right dropdownimg d-none"
+                                onclick="toggleDropdownCategory()">
+                        </div>
+                    </div>
+                    <div id="categoryDropdown" class="d-none">
+                        <div class="fonts cursorPointer" id="technicalTask" onclick="selectTechnicalTask()">Technical
+                            Task</div>
+                        <div class="fonts cursorPointer" id="userStory" onclick="selectUserStory()">User Story</div>
+                    </div>
+                </div>
+
+                <section class="fonts">
+                    <div class="input-group">
+                        <label for="assignTask" class="add-task-label fonts font_2A3647">Subtasks</label>
+                        <div class="input-with-icon" id="inputSubtask">
+                            <input type="text" name="subtask" class="add-task-title add-task-assigned-to cursorPointer"
+                                id="subtaskSelect" placeholder="Add new subtask" autocomplete="off">
+                            <div>
+                                <div>
+                                    <img id="addSubtaskButton" class="subtaskImg cursorPointer"
+                                        src="../Assets/addTask/Property 1=add.svg" alt="" onclick="addSubtask()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="editSubtasks"></div>
+                </section>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="space-between requiredAndButtons">
+    <div class="flex fonts required">
+        <div class="colorRed">*</div>
+        <span class="font_16">This field is required</span>
+    </div>
+
+    <div class="buttons">
+        <button id="clearButton" class="clearButton cursorPointer" onclick="clearTasks()">Clear
+            <img src="../Assets/addTask/Vector.svg" alt="">
+        </button>
+        <button type="button" class="createButton cursorPointer" id="createTask"
+            onclick="createTasks(event), fetchAndPopulateContacts()">Create
+            Task
+            <img src="../Assets/addTask/check.svg" alt="">
+        </button>
+    </div>
+</div>
+
+<div id="popUpAddTask" class="popUp d-none"></div>
+
+<div id="popUpRequired" class="popUp d-none"></div>

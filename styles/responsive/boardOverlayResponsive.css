@@ -1,0 +1,79 @@
+@media (max-width:990px) {
+    .board-overlay {
+        height: 75%;
+        top: calc(50vh - 10px);
+    }
+}
+
+@media (max-width: 550px) {
+    .board-overlay {
+        width: 320px;
+        padding: 20px 20px;
+        max-height: 600px;
+        margin-top: -20px;
+    }
+
+    .testForLi{
+        width: 85%;
+    }
+
+    #subtask-edit-entry {
+        width: 148px;
+    }
+
+    .overlay-content {
+        gap: 20px;
+        padding: inherit;
+    }
+
+    .overlay-header {
+        margin-bottom: -5px;
+    }
+
+    .due-date-container {
+        align-items: start;
+        flex-direction: column;
+    }
+
+    #prio-container-overlay {
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .task-info {
+        margin-top: -23px;
+        margin-bottom: -37px;
+    }
+
+    .subtasks-section {
+        margin-top: 5px;
+        margin-bottom: 20px;
+    }
+
+    .subtasks-list {
+        overflow: scroll;
+        height: 85px;
+    }
+
+    #prioOverlayEdit {
+        width: 80% !important;
+        height: 100 !important;
+    }
+
+    #button-overlay-edit {
+        height: 50% !important;
+        width: 50% !important;
+        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #edit-task-due-date {
+        margin-left: 0;
+    }
+
+    .prio-button {
+        margin-left: 0;
+    }
+}

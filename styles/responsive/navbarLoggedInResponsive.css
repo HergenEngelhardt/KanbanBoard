@@ -1,0 +1,22 @@
+@media (max-width: 990px) {
+    .navbarResponse {
+        display: none;
+    }
+
+    #widget_1,
+    #widget_2,
+    #widget_3,
+    #widget_4 {
+        height: 82px;
+        margin: 0;
+    }
+
+    .forMobile {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .sidelinks {
+        justify-content: inherit;
+    }
+}

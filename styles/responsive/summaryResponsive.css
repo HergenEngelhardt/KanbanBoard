@@ -1,0 +1,169 @@
+@media (max-width: 1290px) {
+
+    .titeljoin,
+    .details {
+        left: 250px;
+    }
+
+    .goodmorning {
+        left: 830px;
+    }
+}
+
+@media (max-width: 1165px) {
+    .goodmorning {
+        display: none;
+    }
+}
+
+@media (max-width: 990px) {
+
+    .summaryimg,
+    .urgentimg {
+        width: 50px;
+        height: 50px;
+    }
+
+    .summarynmb,
+    .urgentnmb,
+    .tasknmb {
+        font-size: 40px;
+    }
+
+    .summarynmb {
+        line-height: 98.8px;
+    }
+    .pencil {
+        height: 110px;
+    }
+
+    .urgent {
+        top: 150px;
+    }
+
+    .tasks {
+        top: 330px;
+    }
+}
+
+@media (max-width: 880px) {
+
+    .titeljoin,
+    .details {
+        left: 140px;
+    }
+}
+
+@media (max-width: 760px) {
+
+    .titeljoin,
+    .details {
+        left: 75px;
+    }
+
+    .titleHeader {
+        font-size: 47px;
+    }
+
+    .titleText {
+        position: relative;
+        top: -65px;
+        font-size: 20px;
+    }
+
+    .victor {
+        width: 75px;
+    }
+
+    .titeljoin {
+        flex-direction: column;
+        display: flex;
+        justify-content: space-between;
+        height: 0;
+        top: 130px;
+        align-items: unset;
+    }
+}
+
+@media (max-width: 690px) {
+    .titleHeader {
+        font-size: revert !important;
+    }
+
+    .titeljoin {
+        left: 10%
+    }
+
+    .details {
+        left: 30%;
+    }
+
+    .urgent,
+    .tasks {
+        left: -70px;
+    }
+
+    .summaryimg,
+    .urgentimg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .tasktext,
+    #upcomingDeadline,
+    .summarymission {
+        font-size: 14px;
+    }
+
+    .checkpencil {
+        width: 336px;
+        gap: 15px;
+    }
+
+    .pencil {
+        height: 110px;
+        width: 151px;
+        top: -50px;
+        position: relative;
+        left: -78px;
+        gap: 0;
+    }
+
+    .urgent {
+        top: 110px;
+        height: 110px;
+        width: 320px;
+    }
+
+    .tasks {
+        top: 255px;
+        height: 85px;
+        width: 320px;
+        gap: 10px;
+    }
+
+    .tasknmb {
+        line-height: 1;
+        height: 30px;
+    }
+
+    .tasktext {
+        line-height: 1;
+        height: 46px;
+    }
+
+    .undertask {
+        height: 95px;
+        padding-bottom: 0;
+    }
+}
+
+@media (max-width: 360px) {
+    .details {
+        left: 22%;
+    }
+
+    .titeljoin {
+        left: 5%;
+    }
+}
