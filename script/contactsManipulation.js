@@ -27,19 +27,19 @@ function displayAddContactButtons() {
 * @returns {string} - HTML string for the large add contact button.
 */
 function generateAddButtonLargeHTML() {
-    return `
-        <div class="add-contact-button" id="show-overlay">
+    return /*HTML*/`
+        <div class="add-contact-button" id="show-overlay" onclick="closeContactOverlay(event)">
             <span>Add New Contact</span>
             <img src="../Assets/personAdd.svg" alt="Add Contact" class="add-icon" />
         </div>`;
 }
- 
- 
- /**
- * Generates the HTML for the small add contact button.
- * @returns {string} - HTML string for the small add contact button.
- */
- function generateAddButtonSmallHTML() {
+
+
+/**
+* Generates the HTML for the small add contact button.
+* @returns {string} - HTML string for the small add contact button.
+*/
+function generateAddButtonSmallHTML() {
     return `
         <div class="add-contact-icon" id="add-contact-icon">
             <img src="../Assets/personAdd.svg" alt="Add Contact">
@@ -129,6 +129,7 @@ function resetSmallScreenUI() {
     if (smallOverlay) smallOverlay.style.display = 'none';
 }
 
+
 /**
  * Attaches the click listener to the dots icon to toggle the small overlay.
  */
@@ -138,8 +139,8 @@ function attachDotsIconListener(dotsIcon, smallOverlay) {
     dotsIcon.onclick = (event) => {
         event.stopPropagation();
         if (smallOverlay) {
-            smallOverlay.style.display = smallOverlay.style.display === 'block' || smallOverlay.style.display === '' 
-                ? 'none' 
+            smallOverlay.style.display = smallOverlay.style.display === 'block' || smallOverlay.style.display === ''
+                ? 'none'
                 : 'flex';
         }
     };
@@ -152,8 +153,8 @@ function attachDotsIconListener(dotsIcon, smallOverlay) {
  * @param {object} contact - The contact object.
  */
 function attachEditAndDeleteListeners(contactId, contact) {
-    let editLink = document.querySelector('.edit-link');
-    let deleteLink = document.querySelector('.delete-link');
+    let editLink = document.querySelector(`#edit-link-${contactId}`);
+    let deleteLink = document.querySelector(`#delete-link-${contactId}`);
     let initialsColor = getRandomColor();
 
     if (editLink) {
@@ -203,19 +204,6 @@ function clearContactDetails() {
 
 
 /**
- * Updates the contact details section with the updated contact information.
- * @param {object} contact - The updated contact object.
- */
-function updateContactDetailsSection(contact) {
-    updateElementContent('#contact-name', contact.name);
-    updateElementContent('#contact-email', contact.email);
-    updateElementContent('#contact-phone', contact.phone);
-    updateElementContent('#contact-initials', getInitials(contact.name));
-    setElementBackgroundColor('#contact-initials', getRandomColor());
-}
-
-
-/**
  * Resets the contact view to show the contact list.
  */
 function resetContactView() {
@@ -228,14 +216,19 @@ function resetContactView() {
  * Opens the overlay and populates input fields with contact details and initials.
  * @param {object} contact - Contact object containing the details.
  */
-function openEditOverlay(contact) {
-        toggleElementVisibility('#contact-overlay', true);
-        document.getElementById('edit-contact-name').value = contact.name || '';
-        document.getElementById('edit-contact-email').value = contact.email || '';
-        document.getElementById('edit-contact-phone').value = contact.phone || '';
-        document.getElementById('contact-initials-overlay').textContent = getInitials(contact.name);
-        document.getElementById('contact-initials-overlay').style.backgroundColor = contact.color || getRandomColor();
-}    
+function openEditOverlay(contact, initialsColor) {
+    toggleElementVisibility('#contact-overlay', true);
+
+    let contactBackgroundOverlay = document.getElementById('contactBackgroundOverlay');
+    contactBackgroundOverlay.classList.remove('dNone');
+    contactBackgroundOverlay.style.display = 'block';
+
+    document.getElementById('edit-contact-name').value = contact.name || '';
+    document.getElementById('edit-contact-email').value = contact.email || '';
+    document.getElementById('edit-contact-phone').value = contact.phone || '';
+    document.getElementById('contact-initials-overlay').textContent = getInitials(contact.name);
+    document.getElementById('contact-initials-overlay').style.backgroundColor = initialsColor || getRandomColor();
+}
 
 
 // Close overlay event listener
@@ -323,7 +316,7 @@ function attachContactClickListeners() {
 * @returns {string} - HTML string for the edit section.
 */
 function generateEditSectionHTML(currentContactId) {
-    return `
+    return /*HTML*/`
         <div class="editSection dNone" id="edit-section-small-contact">
             <a href="#" class="edit-link" onclick="handleEditLinkClick()">
                 <img src="../Assets/edit_21dp_5F6368_FILL0_wght400_GRAD0_opsz20.svg" alt="Edit Icon" class="icon"> Edit

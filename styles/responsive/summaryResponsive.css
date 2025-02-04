@@ -1,8 +1,16 @@
 @media (max-width: 1290px) {
+    .titeljoin {
+        left: 250px;
+        top: 13%;
+    }
 
     .titeljoin,
     .details {
         left: 250px;
+    }
+
+    .details {
+        top: 20%;
     }
 
     .goodmorning {
@@ -33,6 +41,7 @@
     .summarynmb {
         line-height: 98.8px;
     }
+
     .pencil {
         height: 110px;
     }
@@ -50,11 +59,16 @@
 
     .titeljoin,
     .details {
+        height: 0;
         left: 140px;
     }
 }
 
 @media (max-width: 760px) {
+    .details {
+        left: 75px;
+        top: 25%;
+    }
 
     .titeljoin,
     .details {
@@ -96,6 +110,7 @@
 
     .details {
         left: 30%;
+        top: 35%;
     }
 
     .urgent,
@@ -116,12 +131,14 @@
     }
 
     .checkpencil {
-        width: 336px;
-        gap: 15px;
+        width: 291px;
+        height: 145px;
+        gap: 25px;
+        padding-left: 45px;
     }
 
     .pencil {
-        height: 110px;
+        height: 100px;
         width: 151px;
         top: -50px;
         position: relative;
@@ -130,14 +147,15 @@
     }
 
     .urgent {
-        top: 110px;
-        height: 110px;
-        width: 320px;
+        top: 85px;
+        height: 100px;
+        width: 314px;
+        margin-left: 3px;
     }
 
     .tasks {
-        top: 255px;
-        height: 85px;
+        top: 200px;
+        height: 80px;
         width: 320px;
         gap: 10px;
     }
@@ -158,9 +176,107 @@
     }
 }
 
-@media (max-width: 360px) {
+
+@media (max-width: 430px) {
     .details {
-        left: 22%;
+        top: 35%;
+    }
+}
+
+
+
+@media (max-width: 400px) {
+    .mobile_headerNav {
+        height: 150px;
+        left: 48%;
+        top: 65px !important;
+    }
+
+    .checkpencil {
+        height: 231px;
+        padding-left: 16%;
+    }
+
+    .pencil {
+        height: 80px;
+        width: 151px;
+        top: -50px;
+    }
+
+    .summaryp {
+        width: 73px;
+    }
+
+    .summarynmb {
+        font-size: 18px;
+        line-height: 3;
+        height: 45px;
+    }
+
+    .summarymission {
+        font-size: 18px;
+        line-height: 1.5;
+    }
+
+    .urgent {
+        top: 120px;
+        height: 70px;
+        width: 327px;
+        margin-left: -3px;
+    }
+
+    .urgentnmb {
+        font-size: 18px;
+        margin-bottom: -25%;
+    }
+
+    .urgenttext {
+        line-height: 0;
+    }
+
+    .nmbtext {
+        font-size: 18px;
+    }
+
+    #upcomingDeadline p {
+        width: 134px;
+        position: absolute;
+        top: 0;
+    }
+    
+    .tasks {
+        top: 200px;
+        height: 74px;
+        width: 323px;
+        gap: 5px;
+    }
+
+    .seperatorUrgent {
+        height: 69px;
+    }
+
+    .undertask {
+        border-radius: 30%;
+        height: 75px;
+        padding: 0;
+    }
+
+    .tasknmb {
+        font-size: 18px;
+        line-height: 4;
+    }
+
+    .tasktext {
+        height: 22px;
+    }
+
+    .titeljoin {
+        left: 10%;
+        top: 90px;
+    }
+
+    .details {
+        left: 25%;
     }
 
     .titeljoin {

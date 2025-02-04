@@ -139,11 +139,14 @@ function validateUpdatedContact(updatedContact) {
  * @returns {object} - The updated contact object.
  */
 function getUpdatedContact() {
+    let existingContact = contacts.find(c => c.id === currentContactId);
+
     return {
         id: currentContactId,
         name: document.getElementById('edit-contact-name')?.value.trim(),
         email: document.getElementById('edit-contact-email')?.value.trim(),
         phone: document.getElementById('edit-contact-phone')?.value.trim(),
+        color: existingContact ? existingContact.color : "#CCCCCC"
     };
 }
 
@@ -188,7 +191,7 @@ document.getElementById('save-contact-button')?.addEventListener('click', async 
         await updateContactInFirebase(updatedContact);
         hideContactOverlayAndResetForm();
         updateContactDetailsAndReload(updatedContact);
-        currentContactId = null;
+
     } catch (error) {
         console.error('Error saving contact:', error);
     }
@@ -199,9 +202,9 @@ document.getElementById('save-contact-button')?.addEventListener('click', async 
 * Resets the contact edit form fields.
 */
 function resetEditForm() {
-   document.getElementById('edit-contact-name').value = '';
-   document.getElementById('edit-contact-email').value = '';
-   document.getElementById('edit-contact-phone').value = '';
+    document.getElementById('edit-contact-name').value = '';
+    document.getElementById('edit-contact-email').value = '';
+    document.getElementById('edit-contact-phone').value = '';
 }
 
 
@@ -210,14 +213,14 @@ function resetEditForm() {
 * @param {object} contact - The updated contact object.
 */
 function updateContactDetailsSection(contact) {
-   document.getElementById('contact-name').textContent = contact.name;
-   document.getElementById('contact-email').textContent = contact.email;
-   document.getElementById('contact-phone').textContent = contact.phone;
-   document.getElementById('contact-initials').textContent = getInitials(contact.name);
+    document.getElementById('contact-name').textContent = contact.name;
+    document.getElementById('contact-email').textContent = contact.email;
+    document.getElementById('contact-phone').textContent = contact.phone;
 
-   let initialsColor = getRandomColor();
-   document.getElementById('contact-initials').style.backgroundColor = initialsColor;
+    let contactColor = contact.color || "#CCCCCC";
+    document.getElementById('contact-initials').style.backgroundColor = contactColor;
 }
+
 
 
 /**
@@ -226,12 +229,12 @@ function updateContactDetailsSection(contact) {
 * @param {string} [type='success'] - The type of the toast ('success' or 'error').
 */
 function showToast(message, type = 'success') {
-   let toast = document.getElementById('toast');
-   if (!toast) return;
+    let toast = document.getElementById('toast');
+    if (!toast) return;
 
-   toast.textContent = message;
-   toast.className = `toast show ${type}`;
-   setTimeout(() => toast.classList.remove('show'), 3000);
+    toast.textContent = message;
+    toast.className = `toast show ${type}`;
+    setTimeout(() => toast.classList.remove('show'), 3000);
 }
 
 
@@ -267,23 +270,23 @@ function handleOutsideClick(event) {
  */
 function handleEditLinkClick(event) {
     if (!currentContactId) {
-        showToast("Error: No contact selected for editing.", "error");
+        showToast("Fehler: Kein Kontakt zum Bearbeiten ausgewählt.", "error");
         return;
     }
 
     let contact = contacts.find(c => c.id === currentContactId);
     if (contact) {
-        openEditOverlay(contact);
+        let initialsColor = contact.color || getRandomColor();
+        openEditOverlay(contact, initialsColor);
     } else {
-        console.warn(`Contact with ID ${currentContactId} not found.`);
+        console.warn(`Kontakt mit der ID ${currentContactId} nicht gefunden.`);
     }
 
-    let initialsColor = getRandomColor();
-    openEditOverlay(contact, initialsColor);
     closeSmallOverlay();
 }
 
-    document.querySelectorAll('.edit-link').forEach(link => {
+
+document.querySelectorAll('.edit-link').forEach(link => {
     link.addEventListener('click', handleEditLinkClick);
 });
 

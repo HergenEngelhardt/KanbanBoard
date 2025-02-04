@@ -176,13 +176,13 @@ textarea {
 #assignTaskDropdown {
     border: 1px solid #ccc;
     width: 100%;
-    max-width: auto;
     padding: 10px;
     overflow-y: scroll;
     position: absolute;
     background-color: #FFF;
     border-radius: 12px;
     z-index: 1;
+    height: 250px;
 }
 
 .seperator {
@@ -234,6 +234,14 @@ textarea {
     background-color: #FFF;
     border-radius: 12px;
     z-index: 1;
+}
+
+.createdSubtask {
+    height: 20px;
+}
+
+#editSubtasks input {
+    height: 20px;
 }
 
 .createdSubtask:hover img {
@@ -414,12 +422,9 @@ textarea {
 .entry-container {
     display: flex;
     justify-content: space-between;
-    /* Space between name container and checkbox */
     align-items: center;
     padding: 5px 0;
-    /* Add some vertical padding */
     gap: 10px;
-    /* Space between elements */
     max-height: calc(40vh-100px);
 }
 
@@ -428,7 +433,7 @@ textarea {
     display: flex;
     align-items: center;
     gap: 10px;
-    /* Space between initials and name */
+    cursor: pointer;
 }
 
 /* Style for the initials */
@@ -440,10 +445,8 @@ textarea {
     justify-content: center;
     font-weight: bold;
     border-radius: 50%;
-    /* Circular shape */
     font-size: 14px;
     color: white;
-    /* Ensure text color contrasts with the background */
     text-transform: uppercase;
     background-color: #29ABE2;
 }
@@ -457,7 +460,26 @@ textarea {
 /* Style the checkbox */
 .entry-container input[type="checkbox"] {
     flex-shrink: 0;
-    /* Prevent shrinking */
     width: 16px;
     height: 16px;
+}
+
+.show-more-circle {
+    background-color: #007bff;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 50%;
+    font-size: 14px;
+    color: white;
+    text-transform: uppercase;
+
+}
+
+.show-more-circle:hover {
+    background-color: #0056b3;
+    cursor: pointer;
 }

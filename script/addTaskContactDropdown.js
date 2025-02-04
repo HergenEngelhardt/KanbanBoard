@@ -11,22 +11,18 @@ let selectedContacts = [];
  */
 async function loadContactsForDropdown() {
     try {
-        let response = await fetch('https://join-382-default-rtdb.europe-west1.firebasedatabase.app//contacts.json');
+        let response = await fetch('https://join-382-default-rtdb.europe-west1.firebasedatabase.app/contacts.json');
         let contactsData = await response.json();
+
         if (contactsData) {
             contacts = Object.keys(contactsData).map(key => ({ id: key, ...contactsData[key] }));
             populateCheckboxDropdown();
         } else {
-            console.log('No contacts found');
+            console.log("No contacts found");
         }
     } catch (error) {
-        console.error('Error fetching contacts:', error);
+        console.error("Error fetching contacts:", error);
     }
-
-    document.querySelectorAll('#assignTaskDropdown input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('change', updateAssignedContacts);
-    });
-
 }
 
 
@@ -107,7 +103,20 @@ function createContactEntry(contact) {
     let entryContainer = generateDiv('entry-container');
     let nameContainer = createNameContainer(contact);
     let checkbox = createCheckbox(contact);
-    entryContainer.innerHTML = `${nameContainer.outerHTML}${checkbox.outerHTML}`;
+
+    let checkboxLabel = document.createElement('label');
+    checkboxLabel.setAttribute('for', checkbox.id);
+    checkboxLabel.innerHTML = `${nameContainer.outerHTML}`;
+
+    entryContainer.innerHTML = `${checkboxLabel.outerHTML}${checkbox.outerHTML}`;
+
+    entryContainer.addEventListener('click', function(event) {
+        if (event.target !== checkbox) {
+            checkbox.checked = !checkbox.checked;
+            updateAssignedContacts();
+        }
+    });
+
     return entryContainer;
 }
 
@@ -205,12 +214,15 @@ function updateAssignedContacts() {
  * 
  * @returns {void}
  */
+let displayedCount = 4;
+
 function displaySelectedContacts() {
     let selectedContainer = document.getElementById('selectedContactsContainer');
     selectedContainer.innerHTML = '';
-    selectedContacts.forEach(contactName => {
-        let contact = contacts.find(c => c.name === contactName);
 
+    selectedContacts.slice(0, displayedCount).forEach(contactName => {
+        let contact = contacts.find(c => c.name === contactName);
+        
         if (contact) {
             let initialsSpan = createInitialsSpan(contact);
             let contactDiv = document.createElement('div');
@@ -219,7 +231,23 @@ function displaySelectedContacts() {
             selectedContainer.appendChild(contactDiv);
         }
     });
+
+    let remainingContacts = selectedContacts.length - displayedCount;
+    if (remainingContacts > 0) {
+        let showMoreCircle = document.createElement('div');
+        showMoreCircle.classList.add('show-more-circle');
+
+        showMoreCircle.textContent = `+${remainingContacts}`;
+        
+        showMoreCircle.addEventListener('click', function() {
+            displayedCount += 1;
+            displaySelectedContacts();
+        });
+
+        selectedContainer.appendChild(showMoreCircle);
+    }
 }
+
 
 
 /**
@@ -240,6 +268,8 @@ function toggleDropdown() {
         dropdownImg1.style.display = 'none';
         dropdownImg.style.display = 'block';
     }
+
+    updateAssignedContacts();
 }
 
 
@@ -260,4 +290,5 @@ document.addEventListener('click', function (event) {
         dropdownImg1.style.display = 'none';
         dropdownImg.style.display = 'block';
     }
+    updateAssignedContacts();
 });

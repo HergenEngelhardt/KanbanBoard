@@ -15,20 +15,23 @@ function getTaskBoardTemplate(category, task, taskId, contactList, taskClass, su
     let progressPercentage = subtaskCount === 0 ? 0 : Math.round((completedSubtasks / subtaskCount) * 100);
     let barColor = progressPercentage === 0 ? 'lightgray' : 'blue';
 
-    return `
-        <div id="task-${taskId}" class="task draggable ${taskClass}" draggable="true"
+    let progressBarHTML = subtaskCount > 0 ? /*HTML*/`
+        <div class="progress-bar-container" style="margin-top: 10px; display:flex;align-items:center;gap:8px;">
+            <div class="progress-bar-background" 
+                 style="flex-grow:1;background-color:lightgray;height:5px;border-radius:5px;overflow:hidden;">
+                <div class="progress-bar-fill" 
+                     style="width:${progressPercentage}%;background-color:${barColor};height:100%;"></div>
+            </div>
+            <span>${completedSubtasks}/${subtaskCount} Subtasks</span>
+        </div>` : '';
+
+    return /*HTML*/`
+        <div id="task-${taskId}" class="cursorPointer task draggable ${taskClass}" draggable="true"
              onclick="showTaskOverlay('${category}', '${taskId}')">
             <h4 class="task-category ${categoryClass}">${category}</h4>
             <h3>${task.title || "No title"}</h3>
             <p>${task.description || "No description"}</p>
-            <div class="progress-bar-container" style="margin-top: 10px; display:flex;align-items:center;gap:8px;">
-                <div class="progress-bar-background" 
-                     style="flex-grow:1;background-color:lightgray;height:5px;border-radius:5px;overflow:hidden;">
-                    <div class="progress-bar-fill" 
-                         style="width:${progressPercentage}%;background-color:${barColor};height:100%;"></div>
-                </div>
-                <span>${completedSubtasks}/${subtaskCount} Subtasks</span>
-            </div>
+            ${progressBarHTML}
             <div class="contact-priority-container">
                 <div class="contact-list">${contactList}</div>
                 <div class="priority-symbol"><img src="${priorityIcon}" class="priority-icon"></div>
@@ -67,7 +70,7 @@ function getBoardOverlayTemplate(category, task) {
     let contactList = generateOverlayContactList(task.contacts);
     let subtasksList = generateSubtaskList(task);
 
-    return `
+    return /*HTML*/`
        <div class="board-overlay" data-task-id="${task.id}">
         <div class="overlay-header">
             <h2 id="task-category" class="task-category ${categoryClass}">${category}</h2>
@@ -156,7 +159,6 @@ function generateOverlayContactList(contacts) {
 }
 
 
-
 /**
  * Generates the subtasks list HTML for the overlay.
  * @param {object} task - Task object containing subtasks.
@@ -164,8 +166,8 @@ function generateOverlayContactList(contacts) {
  */
 function generateSubtaskList(task) {
     if (!task.id) {
-        console.error("Task ID is undefined for the following task:", task);
-        return "<li>No subtasks available</li>";
+        console.error("Task ID is undefined. Adding temporary ID.", task);
+        task.id = `temp-${Math.random().toString(36).substr(2, 9)}`;
     }
 
     return task.subtasks && task.subtasks.length
@@ -202,9 +204,9 @@ function generateContactDropdownHTML(allContacts, assignedContacts, assignedCont
             </div>
             <div id="editAssignTaskDropdown" class="dropdown-container dNone">
                 ${allContacts.map(contact => {
-                    let initials = contact.initials || 
-                        contact.name.split(' ').map(n => n[0]).join('').toUpperCase();
-                    return `
+        let initials = contact.initials ||
+            contact.name.split(' ').map(n => n[0]).join('').toUpperCase();
+        return `
                         <div class="dropdown-entry">
                             <div class="entry-wrapper">
                                 <div class="user-icon-edit" style="background-color: ${contact.color || '#ccc'};">
@@ -217,14 +219,14 @@ function generateContactDropdownHTML(allContacts, assignedContacts, assignedCont
                             </div>
                         </div>
                     `;
-                }).join('')}
+    }).join('')}
             </div>
             <div id="contact-icons-container" class="contact-icons">
     ${assignedContacts.length > 0 ? assignedContacts.map(contact => {
-        let initials = contact.initials || 
-            (contact.name.includes(' ') ? 
-            contact.name.split(' ').map(n => n[0]).join('') : 
-            contact.name.substring(0, 2)).toUpperCase();
+        let initials = contact.initials ||
+            (contact.name.includes(' ') ?
+                contact.name.split(' ').map(n => n[0]).join('') :
+                contact.name.substring(0, 2)).toUpperCase();
         return `
             <div class="contact-icon" style="background-color: ${contact.color || '#ccc'};">
                 ${initials}

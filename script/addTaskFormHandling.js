@@ -4,7 +4,15 @@
 function calculateDueDate() {
     let duoDate = new Date();
     let formattedDate = duoDate.toISOString().split('T')[0];
-    document.getElementById('dueDate').setAttribute('min', formattedDate);
+    let dueDateInput = document.getElementById('dueDate');
+
+    dueDateInput.setAttribute('min', formattedDate);
+
+    if (dueDateInput.showPicker) {
+        dueDateInput.showPicker();
+    } else {
+        console.log("Dieser Browser unterstützt showPicker() nicht.");
+    }
 }
 
 
@@ -67,14 +75,25 @@ async function resetTaskForm() {
 */
 async function createTasks(event) {
     event.preventDefault();
-
     let taskData = collectTaskData();
     let isValid = await validateTaskData(taskData);
-    if (!isValid) return;
-    
+    if (!isValid) {
+        await loadContactsForDropdown();
+        console.error("Task data validation failed.");
+        return;
+    }
+
+    try {
+        let taskId = await sendTaskToFirebase(taskData, taskData.category);
+        if (!taskId) {
+            console.error("Task ID not generated, aborting.");
+            return;
+        }
+    } catch (error) {
+        console.error("Error during task creation:", error);
+        return;
+    }
     await popUpAddTask();
-    await saveTaskToFirebase(taskData);
-    await sendTaskToFirebase(taskData, taskData.category);
     await clearTasks();
     await changeToBoard();
 }

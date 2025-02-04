@@ -9,7 +9,6 @@
 #main-content {
     margin-left: 230px;
     margin-top: 95px;
-    flex-grow: 1;
     display: flex;
 }
 
@@ -35,7 +34,6 @@
     align-items: center;
     overflow-x: hidden;
     overflow-y: auto;
-    height: calc(100vh - 100px);
     cursor: pointer;
     padding-bottom: 15px;
 }
@@ -56,6 +54,11 @@
     display: flex;
     align-items: center;
     padding: 10px 20px;
+}
+
+
+.contact-item:hover {
+    background-color: lightgrey;
 }
 
 .contact-group {
@@ -152,6 +155,11 @@
     display: none;
 }
 
+.dots-icon img {
+    width: 50px;
+    height: 50px;
+}
+
 .separator {
     width: 3px;
     height: 30px;
@@ -160,7 +168,8 @@
 }
 
 .add-contact {
-    flex: 1;
+    width: 100%;
+    height: calc(100vh - 100px);
     padding-left: 30px;
 }
 
@@ -273,7 +282,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .editSection a {
@@ -282,9 +291,6 @@
     flex-direction: row;
     text-decoration: none;
     color: black;
-    top: 20px;
-    left: -215px;
-    position: relative;
     margin-right: 15px;
 }
 
@@ -348,14 +354,15 @@
 .toast {
     visibility: hidden;
     min-width: 150px;
-    min-height: 40px;
-    color: white;
+    min-height: 80px;
+    background-color: #2A3647;
+    color: #f4f4f4;
     text-align: center;
     border-radius: 15px;
     padding: 15px;
     position: fixed;
-    z-index: 2000;
-    right: -30%;
+    z-index: 2001;
+    right: 0;
     top: 50%;
     transform: translate(100%, -80%);
     opacity: 0;
@@ -378,7 +385,7 @@
 }
 
 .toast.error {
-    background-color: #1a2b47;
+    background-color: #dc3545;
 }
 
 .edit-input {
@@ -404,26 +411,27 @@
 
 .add-contact-icon {
     display: none;
-    position: fixed;
-    bottom: 90px;
-    right: 10%;
-    background-color: #2A3647;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 999;
 }
 
 .add-contact-icon img {
-    width: 38px;
-    height: 38px;
-    object-fit: contain;
+    display: none;
 }
 
 .dNone {
     display: none !important;
+}
+
+#contactBackgroundOverlay.active {
+    display: block;
+}
+
+#contactBackgroundOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    display: none;
 }

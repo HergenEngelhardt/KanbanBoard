@@ -44,22 +44,39 @@ async function sendTaskToFirebase(preparedTaskData, category) {
     try {
         let response = await fetch(`${CREATETASK_URL}/${category}.json`, {
             method: "POST",
-            headers: { 'Content-Type': 'application/json' },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(preparedTaskData),
         });
 
         if (!response.ok) {
-            console.error("Failed to save task to Firebase:", response.statusText);
+            console.error("Firebase error:", response.statusText);
             return null;
         }
-        let data = await response.json();
-        return data.name;
 
+        let data = await response.json();
+        console.log("Firebase Response:", data); // Debugging
+        let taskId = data.name;
+
+        if (!taskId) {
+            console.error("Task ID is undefined!");
+            return null;
+        }
+
+        let updatedData = { ...preparedTaskData, id: taskId };
+
+        await fetch(`${CREATETASK_URL}/${category}/${taskId}.json`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updatedData),
+        });
+
+        return taskId;
     } catch (error) {
-        console.error("Error saving task to Firebase:", error);
+        console.error("Error in sendTaskToFirebase:", error);
         return null;
     }
 }
+
 
 
 /**
