@@ -121,19 +121,33 @@ function getBoardOverlayTemplate(category, task) {
 
 
 /**
- * Generates the HTML for the contact list.
- * @param {Array} contacts - List of contacts assigned to the task.
- * @returns {string} - HTML string for the contact list.
+ * Generates a contact list with initials and a background color.
+ * Displays up to 4 contacts, adding a "+X" indicator if there are more.
+ *
+ * @param {Array} contacts - Array of contact objects with `name` and optional `color`.
+ * @returns {string} HTML string representing the contact list.
  */
 function generateContactList(contacts) {
     if (!contacts || contacts.length === 0) return "";
-    return contacts.map(function (contact) {
+    
+    let maxVisible = 4;
+    let visibleContacts = contacts.slice(0, maxVisible);
+    let hiddenCount = contacts.length - maxVisible;
+
+    let contactHTML = visibleContacts.map(function (contact) {
         let name = contact && contact.name ? contact.name : "Unknown";
         let initials = getInitials(name);
         let bgColor = contact.color || getRandomColor();
         return `<span class="contact-initial" style="background-color: ${bgColor};">${initials}</span>`;
     }).join('');
+
+    if (hiddenCount > 0) {
+        contactHTML += `<span class="contact-initial more-contacts">+${hiddenCount}</span>`;
+    }
+
+    return contactHTML;
 }
+
 
 
 /**
@@ -266,5 +280,82 @@ function generatePrioButtonsHTML(selectedPrio, context) {
                 </button>
             `).join("")}
         </div>
+    `;
+}
+
+/**
+ * Generates the HTML for the subtask input field.
+ * 
+ * @param {string} taskId - The ID of the task.
+ * @param {string} category - The category of the task.
+ * @returns {string} - The HTML string for the input field.
+ */
+function generateSubtaskInputHTML(taskId, category) {
+    return /*HTML*/`
+        <div class="editSubtaskInput">
+            <input type="text" id="newSubtaskInput" placeholder="Add new subtask" autocomplete="off">
+            <div class="seperatorSubtaskEditInput"></div>
+            <img id="addSubtaskButton" class="subtaskImg cursorPointer" 
+                src="../Assets/addTask/Property 1=add.svg" alt="Add" 
+                onclick="addNewSubtask('${taskId}', '${category}')">
+        </div>
+    `;
+}
+
+/**
+ * Generates the HTML for the list of subtasks.
+ * 
+ * @param {Object} task - The task object containing subtasks.
+ * @param {string} category - The category of the task.
+ * @returns {string} - The HTML string for the subtask list.
+ */
+function generateSubtaskTemplate(task, category) {
+    if (!Array.isArray(task.subtasks) || task.subtasks.length === 0) {
+        return "<div>No subtasks available</div>";
+    }
+
+    let subtasksHTML = task.subtasks.map((subtask, index) => /*HTML*/`
+        <li id="subtaskDiv_${index}" class="subtask-item">
+            <div class="testForLi">
+                <ul>•<span class="editSubtaskText" contenteditable="true">${subtask.text}</span></ul>
+                <div class="subtask-icons">
+                    <img class="editSubtask" src="../Assets/addTask/Property 1=edit.svg" alt="Edit"
+                        onclick="editSubtaskEdit('${task.id}', '${category}', ${index})">
+                    <div class="seperatorSubtaskIcons"></div>
+                    <img class="deleteSubtask" src="../Assets/addTask/Property 1=delete.svg" alt="Delete"
+                        onclick="deleteSubtask('${task.id}', '${category}', ${index})">
+                </div>    
+            </div>
+        </li>
+    `).join('');
+
+    return `<ul>${subtasksHTML}</ul>`;
+}
+
+/**
+* Generates the HTML structure for a subtask.
+*
+* @param {string} subtaskText - The text of the subtask.
+* @param {string} taskId - The ID of the task.
+* @param {string} category - The category of the task.
+* @param {number} index - The index of the subtask.
+* @returns {string} - The HTML string for the subtask.
+*/
+function generateSubtaskHTML(subtaskText, taskId, category, index) {
+    return /*HTML*/`
+ <li id="subtaskDiv_${index}" class="subtask-item">
+     <div class="testForLi">
+         <ul id="subtask-edit-entry">
+             •<span class="editSubtaskText" contenteditable="true">${subtaskText}</span>
+         </ul>
+         <div class="subtask-icons">
+             <img class="editSubtask" src="../Assets/addTask/Property 1=edit.svg" alt="Edit" data-task-id="${taskId}"
+                 data-category="${category}" data-index="${index}">
+             <div class="seperatorSubtaskIcons"></div>
+             <img class="deleteSubtask" src="../Assets/addTask/Property 1=delete.svg" alt="Delete"
+                 data-task-id="${taskId}" data-category="${category}" data-index="${index}">
+         </div>
+     </div>
+ </li>
     `;
 }

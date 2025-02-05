@@ -29,11 +29,23 @@ function collectPriority() {
  * @returns {Array<Object>} - List of subtasks with text and completion status.
  */
 function collectBoardSubtasks() {
-    return Array.from(document.querySelectorAll('.subtasks-section .subtask-item')).map(subtask => ({
-        text: subtask.querySelector('.editSubtaskText')?.textContent.trim() || "",
-        completed: subtask.querySelector('.subtask-checkbox')?.checked || false
-    }));
+    return Array.from(document.querySelectorAll('.subtasks-section .subtask-item')).map(subtask => {
+        let textElement = subtask.querySelector('.editSubtaskText');
+        let inputElement = subtask.querySelector('.edit-subtask-input');
+
+        let text = inputElement && inputElement.value.trim() !== "" 
+            ? inputElement.value.trim() 
+            : textElement && textElement.textContent.trim() !== "" 
+                ? textElement.textContent.trim() 
+                : "";
+
+        return {
+            text: text,
+            completed: subtask.querySelector('.subtask-checkbox')?.checked || false
+        };
+    });
 }
+
 
 
 /**
@@ -80,16 +92,6 @@ function collectOverlayData() {
 
 
 /**
- * Validates the task data to ensure required fields are present.
- * @param {Object} task - Task data object.
- * @returns {boolean} - True if valid, otherwise false.
- */
-function validateTaskData(task) {
-    return task.title && task.description && task.dueDate;
-}
-
-
-/**
  * Handles the save action for the edited task.
  * @param {string} taskId - The ID of the task being edited.
  * @param {string} category - The category of the task being edited.
@@ -98,9 +100,8 @@ async function saveChanges(taskId, category) {
     let updatedTask = collectOverlayData();
     updatedTask.id = taskId;
     updatedTask.category = category;
-    updatedTask.prio = collectPriority();
-    updatedTask.contacts = collectContacts();
-    updatedTask.column = updatedTask.column || 'toDo';
+    updatedTask.subtasks = removeDuplicateSubtasks(updatedTask.subtasks);
+
     try {
         await updateTaskInDatabase(category, taskId, updatedTask);
         closeTaskOverlay();
@@ -110,6 +111,21 @@ async function saveChanges(taskId, category) {
     }
 }
 
+
+/**
+ * Removes duplicate subtasks based on their text content.
+ * 
+ * @param {Array} subtasks - List of subtasks to be filtered.
+ * @returns {Array} - Filtered list without duplicates.
+ */
+function removeDuplicateSubtasks(subtasks) {
+    let seen = new Set();
+    return subtasks.filter(subtask => {
+        let isDuplicate = seen.has(subtask.text);
+        seen.add(subtask.text);
+        return !isDuplicate;
+    });
+}
 
 /**
  * Updates task data in Firebase.

@@ -47,7 +47,7 @@ function clearColumns() {
     columns.forEach(columnId => {
         let columnElement = document.getElementById(columnId);
         if (columnElement) {
-            columnElement.innerHTML = ""; 
+            columnElement.innerHTML = "";
         }
     });
 }
@@ -83,21 +83,9 @@ function addTaskToColumn(task, category, taskId, columns) {
         return;
     }
 
-    let progress = calculateSubtaskProgress(task.subtasks);
-    task.subtaskProgress = `${progress.completed}/${progress.total}`;
-    let contactList = task.contacts ? generateContactList(task.contacts) : "";
-    let taskClass = getTaskClass(task.title);
-    let taskHtml = getTaskBoardTemplate(
-        category,
-        task,
-        taskId,
-        contactList,
-        taskClass,
-        progress.total,
-        progress.completed
-    );
-
+    let taskHtml = prepareTaskHtml(task, category, taskId);
     let existingTask = document.getElementById(`task-${taskId}`);
+
     if (existingTask) {
         existingTask.outerHTML = taskHtml;
     } else {
@@ -106,6 +94,31 @@ function addTaskToColumn(task, category, taskId, columns) {
 
     syncContactIcons(task.contacts || []);
 }
+
+/**
+ * Prepares the HTML representation of a task.
+ * @param {object} task - Task object.
+ * @param {string} category - Task category.
+ * @param {string} taskId - Task ID.
+ * @returns {string} The generated task HTML.
+ */
+function prepareTaskHtml(task, category, taskId) {
+    let progress = calculateSubtaskProgress(task.subtasks);
+    task.subtaskProgress = `${progress.completed}/${progress.total}`;
+    let contactList = task.contacts ? generateContactList(task.contacts) : "";
+    let taskClass = getTaskClass(task.title);
+
+    return getTaskBoardTemplate(
+        category,
+        task,
+        taskId,
+        contactList,
+        taskClass,
+        progress.total,
+        progress.completed
+    );
+}
+
 
 
 /**
@@ -151,14 +164,16 @@ function updateProgressBar(taskId, progressPercentage) {
 * Shows the task form on the board.
 */
 function addTaskOnBoard() {
-   document.getElementById('templateAddTask').classList.remove('d-none');
+    document.getElementById('templateAddTask').classList.remove('d-none');
+    document.getElementById('popUpTaskOnBoard').classList.remove('d-none');
 }
 
 /**
 * Hides the task form on the board.
 */
-function closeTaskOnBoard() {
-   document.getElementById('templateAddTask').classList.add('d-none');
+function closeTaskOnBoard(event) {
+    event.stopPropagation();
+    document.getElementById('popUpTaskOnBoard').classList.add('d-none');
 }
 
 
@@ -167,7 +182,7 @@ function closeTaskOnBoard() {
 * @param {Event} event - The click event.
 */
 function dontClose(event) {
-   event.stopPropagation();
+    event.stopPropagation();
 }
 
 
