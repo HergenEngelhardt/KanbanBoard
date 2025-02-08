@@ -7,19 +7,14 @@ function calculateDueDate() {
     let dueDateInput = document.getElementById('dueDate');
 
     dueDateInput.setAttribute('min', formattedDate);
-
-    if (dueDateInput.showPicker) {
-        dueDateInput.showPicker();
-    } else {
-        console.log("Dieser Browser unterstützt showPicker() nicht.");
-    }
+    dueDateInput.showPicker();
 }
 
 
 /**
- * Resets all task-related fields to their default state.
- * Clears inputs, dropdowns, checkboxes, and hides the category dropdown.
- * 
+ * Resets all task-related fields to their default state, including inputs, dropdowns, and checkboxes.
+ * Hides the category dropdown and clears subtasks.
+ *
  * @async
  * @returns {Promise<void>} Resolves when all fields are cleared.
  */
@@ -34,12 +29,16 @@ async function clearTasks() {
     document.getElementById('categorySelect').selectedIndex = 0;
     document.getElementById('categoryDropdown').classList.add('d-none');
     document.getElementById('subtaskSelect').value = "";
+
     contacts.forEach(contact => {
         let checkbox = document.getElementById(`checkbox_${contact.name.replace(/\s+/g, '_')}`);
         if (checkbox) {
             checkbox.checked = false;
         }
     });
+
+    document.getElementById('editSubtasks').innerHTML = "";
+    updateSubtaskVisibility();
 }
 
 
@@ -87,8 +86,9 @@ async function createTasks(event) {
         return;
     }
 
-    await finalizeTaskCreation();
+    await finalizeTaskCreationToBoard();
 }
+
 
 /**
  * Handles the case when task data validation fails.
@@ -98,10 +98,11 @@ async function handleInvalidTaskData() {
     console.error("Task data validation failed.");
 }
 
+
 /**
  * Finalizes the task creation process by updating the UI.
  */
-async function finalizeTaskCreation() {
+async function finalizeTaskCreationToBoard() {
     await popUpAddTask();
     await clearTasks();
     await changeToBoard();

@@ -1,18 +1,4 @@
 /**
- * Validates the sign-up form and handles user registration.
- * @param {Event} event - The form submit event.
- */
-function validateSignUp(event) {
-    event.preventDefault();
-    let name = document.getElementById('name').value.trim();
-    let email = document.getElementById('email').value.trim();
-    let password = document.getElementById('password').value.trim();
-    let confirmPassword = document.getElementById('confirm-password').value.trim();
-    processSignUp(name, email, password, confirmPassword);
-}
-
-
-/**
  * Processes the sign-up logic after form data is collected.
  * @param {string} name - The user's name.
  * @param {string} email - The user's email.

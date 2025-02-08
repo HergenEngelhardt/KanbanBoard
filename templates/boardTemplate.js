@@ -149,7 +149,6 @@ function generateContactList(contacts) {
 }
 
 
-
 /**
  * Generates HTML for a list of contacts to display in an overlay.
  *
@@ -209,50 +208,58 @@ function generateSubtaskList(task) {
  * @returns {string} The generated HTML content for the dropdown and selected icons.
  */
 function generateContactDropdownHTML(allContacts, assignedContacts, assignedContactIds) {
-    return `
+    let assignedNames = assignedContacts.map(contact => contact.name).join(', ');
+    let inputFieldValue = assignedNames.length > 0 ? assignedNames : 'Select contacts to assign';
+
+    return /*HTML*/ `
         <h3 class="overlay-heading">Assigned to</h3>
         <div class="dropdown-wrapper">
             <div class="dropdown-header" onclick="toggleEditDropdown()">
-                <input type="text" id="editAssignedTo" placeholder="Select contacts to assign" readonly>
+                <input type="text" id="editAssignedTo" placeholder="Select contacts to assign" readonly value="${inputFieldValue}">
                 <span class="dropdown-arrow">▼</span>
             </div>
             <div id="editAssignTaskDropdown" class="dropdown-container dNone">
-                ${allContacts.map(contact => {
-        let initials = contact.initials ||
-            contact.name.split(' ').map(n => n[0]).join('').toUpperCase();
-        return `
+                ${allContacts
+                    .map(contact => {
+                        let initials = contact.initials ||
+                            contact.name.split(' ').map(n => n[0]).join('').toUpperCase();
+                        const checkboxId = `checkbox-${contact.id}`;
+                        return `
                         <div class="dropdown-entry">
-                            <div class="entry-wrapper">
+                            <label class="entry-wrapper cursorPointer" for="${checkboxId}">
                                 <div class="user-icon-edit" style="background-color: ${contact.color || '#ccc'};">
                                     ${initials}
                                 </div>
                                 <div class="user-name">${contact.name}</div>
-                                <input class="checkbox-overlay-edit" type="checkbox" value="${contact.id}" 
+                                <input class="checkbox-overlay-edit" type="checkbox" id="${checkboxId}" value="${contact.id}" 
                                     ${assignedContactIds.includes(contact.id) ? 'checked' : ''} 
                                     onclick="assignContact('${contact.id}')">
-                            </div>
+                            </label>
                         </div>
                     `;
-    }).join('')}
+                    })
+                    .join('')}
             </div>
             <div id="contact-icons-container" class="contact-icons">
-    ${assignedContacts.length > 0 ? assignedContacts.map(contact => {
-        let initials = contact.initials ||
-            (contact.name.includes(' ') ?
-                contact.name.split(' ').map(n => n[0]).join('') :
-                contact.name.substring(0, 2)).toUpperCase();
-        return `
-            <div class="contact-icon" style="background-color: ${contact.color || '#ccc'};">
-                ${initials}
+                ${assignedContacts.length > 0
+                    ? assignedContacts.map(contact => {
+                        let initials = contact.initials ||
+                            (contact.name.includes(' ') 
+                                ? contact.name.split(' ').map(n => n[0]).join('') 
+                                : contact.name.substring(0, 2)
+                            ).toUpperCase();
+                        return `
+                            <div class="contact-icon" style="background-color: ${contact.color || '#ccc'};">
+                                ${initials}
+                            </div>
+                        `;
+                    }).join('')
+                    : '<p>No contacts assigned</p>'
+                }
             </div>
-        `;
-    }).join('') : '<p>No contacts assigned</p>'}
-</div>
-
         </div>
     `;
 }
-
 
 
 /**
@@ -283,6 +290,7 @@ function generatePrioButtonsHTML(selectedPrio, context) {
     `;
 }
 
+
 /**
  * Generates the HTML for the subtask input field.
  * 
@@ -301,6 +309,7 @@ function generateSubtaskInputHTML(taskId, category) {
         </div>
     `;
 }
+
 
 /**
  * Generates the HTML for the list of subtasks.
@@ -331,6 +340,7 @@ function generateSubtaskTemplate(task, category) {
 
     return `<ul>${subtasksHTML}</ul>`;
 }
+
 
 /**
 * Generates the HTML structure for a subtask.

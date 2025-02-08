@@ -191,10 +191,15 @@ async function guestLogin() {
  * Displays a greeting template on smaller devices.
  */
 async function greetingTemplate() {
-    document.getElementById('greetingLogin').classList.remove('dnone');
-    document.getElementById('forGreeting').classList.add('dnone');
-    document.getElementById('sidefoot').classList.add('dnone');
-    document.getElementById('buttonLoginForGreeting').classList.add('d-none');
+    let greetingLogin = document.getElementById('greetingLogin');
+    let forGreeting = document.getElementById('forGreeting');
+    let sidefoot = document.getElementById('sidefoot');
+    let buttonLoginForGreeting = document.getElementById('buttonLoginForGreeting');
+
+    if (greetingLogin) greetingLogin.classList.remove('dnone');
+    if (forGreeting) forGreeting.classList.add('dnone');
+    if (sidefoot) sidefoot.classList.add('dnone');
+    if (buttonLoginForGreeting) buttonLoginForGreeting.classList.add('d-none');
 }
 
 
@@ -237,9 +242,9 @@ function togglePasswordVisibility(inputId, toggleIconId) {
     let toggleIcon = document.getElementById(toggleIconId);
     if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
-        toggleIcon.src = '/Assets/visibility.svg';
+        toggleIcon.src = '../Assets/visibility.svg';
     } else {
         passwordInput.type = 'password';
-        toggleIcon.src = '/Assets/visibility_off - Copy.svg';
+        toggleIcon.src = '../Assets/visibility_off - Copy.svg';
     }
 }

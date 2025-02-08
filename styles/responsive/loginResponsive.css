@@ -1,19 +1,11 @@
 @media (min-width:1440px) {
     .content-wrapper {
-        background-color: #f4f4f4;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
         overflow: auto;
-        gap: 10px;
         width: 100%;
         max-width: 1440px;
         margin: 0 auto;
-        margin-top: 10%;
     }
 }
-
 
 @media (max-width: 980px) {
     .login-joinContainer {
@@ -164,8 +156,9 @@
         position: inherit;
         align-self: center;
         order: 0 !important;
-        width: 52%;
+        width: 100%;
         padding: 0;
+        transform: none;
     }
 }
 

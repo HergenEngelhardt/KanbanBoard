@@ -95,6 +95,7 @@ function addTaskToColumn(task, category, taskId, columns) {
     syncContactIcons(task.contacts || []);
 }
 
+
 /**
  * Prepares the HTML representation of a task.
  * @param {object} task - Task object.
@@ -118,7 +119,6 @@ function prepareTaskHtml(task, category, taskId) {
         progress.completed
     );
 }
-
 
 
 /**
@@ -168,12 +168,17 @@ function addTaskOnBoard() {
     document.getElementById('popUpTaskOnBoard').classList.remove('d-none');
 }
 
+
 /**
-* Hides the task form on the board.
-*/
+ * Closes the task popup on the board and clears all task-related fields.
+ * Stops the event propagation to prevent any further handling.
+ *
+ * @param {Event} event - The event object from the trigger.
+ */
 function closeTaskOnBoard(event) {
     event.stopPropagation();
     document.getElementById('popUpTaskOnBoard').classList.add('d-none');
+    clearTasks();
 }
 
 
@@ -196,9 +201,7 @@ window.onload = async function () {
     let taskOverlay = document.getElementById("taskOverlay");
     if (taskOverlay) {
         taskOverlay.classList.add("dNone");
-    } else {
-        console.warn("Element mit der ID 'taskOverlay' nicht gefunden.");
-    }
+    } 
     await fetchTasks();
 };
 

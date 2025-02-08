@@ -1,19 +1,7 @@
-.join {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 98%;
-    height: 90vh;
-    overflow: hidden;
-    flex-direction: column;
-    left: auto;
-}
-
 #signup-logoContainer {
     position: absolute;
-    top: 20%;
-    left: 20%;
+    /* top: 20%;
+    left: 20%; */
     transform: translate(-50%, -50%);
     z-index: 3000;
     animation: move-logo 1.5s ease forwards;
