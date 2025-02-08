@@ -1,3 +1,5 @@
+
+
 @media (min-width:1440px) {
     .content-wrapper {
         overflow: auto;
@@ -62,12 +64,6 @@
         font-size: 15px;
     }
 
-    .toast {
-        min-width: 130px;
-        right: 40px;
-        transform: translate(10%, -50%);
-    }
-
     .notice_link {
         margin-top: 40px;
         padding-left: 20px;
@@ -103,14 +99,10 @@
 }
 
 @media (max-width: 780px) {
-    
+
     .joinLogo img {
         width: 70px;
         height: 70px;
-    }
-
-    .toast.show {
-        transform: translate(-70%, -70%);
     }
 
     .login-joinContainer h1 {
@@ -141,6 +133,7 @@
         padding: 12px 15px;
         font-size: 16px;
     }
+
     .notice_link {
         margin-top: 15px;
         font-size: 12px;
@@ -188,12 +181,6 @@
         cursor: pointer;
     }
 
-    .toast.show {
-        transform: translate(-15%, -205%);
-        width: 250px;
-        height: 20px;
-    }
-
     .buttons {
         flex-direction: column;
         gap: 6px;
@@ -218,5 +205,8 @@
     .legalPolicy {
         flex-direction: column;
         margin-right: 20% !important;
+        top: -13px;
+        position: relative;
+        gap: 0;
     }
 }
